@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>window.$ = window.jQuery = require('./libs/jquery-3.1.1.min.js');</script>
+    <script src="console-helper.js"></script>
+</head>
+<body>
+<div>
+    <input type="date" id="dateInp">
+    <br><br>
+    <button id="getAllRevisionsButton" onclick="getRevisions()">Get All Revisions Data</button>
+    <button id="getLatestRevisionButton" onclick="getLatestRevision()">Get Latest Revision Data</button>
+    <br><br>
+    <button id="getDCButton" onclick="getDC()">Get Declared Capacity Data</button>
+    <br><br>
+    <div id="console" style="border: 1px solid black;width: 95%;height: 400px;overflow: scroll;">
+    </div>
+    <button onclick="clearConsole()">ClearConsole</button>
+</div>
+<script src="index.js"></script>
+</body>
+</html>
