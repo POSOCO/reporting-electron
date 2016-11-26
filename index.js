@@ -7,7 +7,11 @@ $(document).ready(function () {
 function getRevisions() {
     var day = document.getElementById("dateInp").value;
     getRevisionData(new Date(day), function (data) {
-        WriteLineConsole(JSON.stringify(data));
+        //WriteLineConsole(JSON.stringify(data));
+		for(var i = 0;i<data.length;i++){
+			WriteLineConsole(data[i].Revision + " ---> " + data[i].Remark);
+		}
+        //WriteLineConsole((data.map(function(obj){return (obj.Revision + "===>" + obj.Remark)})).join("\n"));
     });
 }
 
@@ -16,6 +20,8 @@ function getLatestRevision() {
     var day = document.getElementById("dateInp").value;
     getRevisionData(new Date(day), function (data) {
         WriteLineConsole(JSON.stringify(data[0], null, '\t'));
+        WriteLineConsole("Latest Revision Comment is " + data[0].Remark);
+		WriteLineConsole("Latest Revision Number is " + data[0].Revision);
     });
 }
 
