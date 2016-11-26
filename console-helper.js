@@ -16,7 +16,7 @@ document.onreadystatechange = function () {
 function WriteLineConsole(str) {
     var currentDate = new Date();
     var para = document.createElement("span");
-    var n = "******************************";
+    var n = "-------------------------------";
     var node = document.createTextNode(str);
 	para.appendChild(document.createElement("BR"));
     para.appendChild(document.createTextNode(n));
