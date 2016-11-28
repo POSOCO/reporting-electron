@@ -13,10 +13,22 @@
     <br><br>
     <button id="getDCButton" onclick="getDC()">Get Declared Capacity Data</button>
     <br><br>
+    <button id="getExppButton" onclick="getExpp()">Get ExPP Data</button>
+    <br><br>
+    <button id="getRequisitionButton" onclick="getRequisition()">Get Requisition Data</button>
+    <br><br>
+    <button id="getNetScheduleButton" onclick="getNetSchedule()">Get Net Schedule Data</button>
+    <br><br>
+    <select id="stateSelect">
+        <option value="GEB_State Total">GEB_State Total</option>
+    </select><br>
+    <button id="getStateTotalNetMUbutton" onclick="getStateTotalNetMU()">get State Total NetMU</button>
+    <br><br>
     <div id="console" style="border: 1px solid black;width: 95%;height: 400px;overflow: auto;padding-left:5px">
     </div>
     <button onclick="clearConsole()">ClearConsole</button>
 </div>
 <script src="index.js"></script>
+<script src="netSchedules.js"></script>
 </body>
 </html>
