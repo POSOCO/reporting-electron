@@ -14,6 +14,8 @@ app.on('window-all-closed', function () {
     }
 });
 
+var graphChildWindow;
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function () {
@@ -37,5 +39,42 @@ app.on('ready', function () {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null;
+    });
+
+    //ipc stuff
+    var ipc = require("electron").ipcMain;
+
+    ipc.on('create-graph', function (event, args) {
+        if (graphChildWindow == null) {
+            graphChildWindow = new BrowserWindow({
+                'web-preferences': {
+                    'web-security': false
+                },
+                width: 800,
+                height: 800,
+                resizable: true,
+                show: false,
+                icon: __dirname + '/favicon.ico'
+            });
+            // and load the index.html of the app.
+            graphChildWindow.loadURL('file://' + __dirname + '/graphChild.html');
+
+            // Emitted when the window is closed.
+            graphChildWindow.on('closed', function () {
+                // Dereference the window object, usually you would store windows
+                // in an array if your app supports multi windows, this is the time
+                // when you should delete the corresponding element.
+                graphChildWindow = null;
+            });
+
+            graphChildWindow.webContents.on('did-finish-load', function () {
+                graphChildWindow.show();
+                graphChildWindow.webContents.send('append-graph-data', args);
+            });
+        }
+        else {
+            graphChildWindow.show();
+            graphChildWindow.webContents.send('append-graph-data', args);
+        }
     });
 });

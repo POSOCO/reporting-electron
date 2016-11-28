@@ -35,3 +35,23 @@ function getStateTotalNetMU() {
         });
     });
 }
+
+function getAllStatesTotalNetMU() {
+    var day = document.getElementById("dateInp").value;
+    var stateSelectEl = document.getElementById("stateSelect");
+    //get latest revision
+    getRevisionData(new Date(day), function (data) {
+        WriteLineConsole("Latest revision is " + data[0]["Revision"]);
+        var rev = data[0]["Revision"];
+        for (var i = 0; i < stateSelectEl.options.length; i++) {
+            var stateStr = stateSelectEl.options[i].value;
+            var callBackFactory = function () {
+                var str = stateStr;
+                return function (data) {
+                    WriteLineConsole(str + " Net MUs is " + data.mu);
+                }
+            };
+            getStateTotalNetMUData(stateStr, new Date(day), rev, callBackFactory());
+        }
+    });
+}

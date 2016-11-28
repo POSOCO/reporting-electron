@@ -1,3 +1,5 @@
+var ipc = require("electron").ipcRenderer;
+
 $(document).ready(function () {
     document.getElementById('dateInp').valueAsDate = new Date();
     getRevisions();
@@ -193,4 +195,9 @@ function extractScheduleFromJSString(contents, firstvariable, secondvariable) {
     var extracted = contents.substring(firstInd + firstvariable.length, secondInd).replace(/\\/g, "");
     var expp_array = JSON.parse(extracted);
     return expp_array;
+}
+
+//utility function
+function createGraphChild() {
+    ipc.send('create-graph', {data: [[Math.random(), Math.random()], [Math.random(), Math.random()]]});
 }
