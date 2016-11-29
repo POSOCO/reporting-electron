@@ -33,13 +33,76 @@
     <br><br>
     <button id="getAllStatesTotalNetMUbutton" onclick="getAllStatesTotalNetMU()">get All States Latest NetMUs</button>
     <br><br>
-    <button id="createGraphChildButton" onclick="createGraphChild()">createGraphChild</button>
+    <select id="generatorSelect">
+        <option value="CGPL">CGPL</option>
+        <option value="GANDHAR-APM">GANDHAR-APM</option>
+        <option value="GANDHAR-NAPM">GANDHAR-NAPM</option>
+        <option value="GANDHAR-RLNG">GANDHAR-RLNG</option>
+        <option value="KAPS">KAPS</option>
+        <option value="KAWAS-APM">KAWAS-APM</option>
+        <option value="KAWAS-NAPM">KAWAS-NAPM</option>
+        <option value="KAWAS-RLNG">KAWAS-RLNG</option>
+        <option value="KAWAS-zLIQ">KAWAS-zLIQ</option>
+        <option value="KSTPS I&amp;II">KSTPS I&amp;II</option>
+        <option value="KSTPS7">KSTPS7</option>
+        <option value="MOUDA">MOUDA</option>
+        <option value="NSPCL">NSPCL</option>
+        <option value="RGPPL_EBID">RGPPL_EBID</option>
+        <option value="RGPPL-GAS">RGPPL-GAS</option>
+        <option value="RGPPL-RLNG">RGPPL-RLNG</option>
+        <option value="SASAN">SASAN</option>
+        <option value="SIPAT I">SIPAT I</option>
+        <option value="SIPAT II">SIPAT II</option>
+        <option value="SSP">SSP</option>
+        <option value="TAPS-I">TAPS-I</option>
+        <option value="TAPS-II">TAPS-II</option>
+        <option value="VSTPS I">VSTPS I</option>
+        <option value="VSTPS II">VSTPS II</option>
+        <option value="VSTPS III">VSTPS III</option>
+        <option value="VSTPS IV">VSTPS IV</option>
+        <option value="VSTPS V">VSTPS V</option>
+        <option value="Grand Total">Grand Total</option>
+        <option value="Time Block">Time Block</option>
+        <option value="Time Desc">Time Desc</option>
+        <option value="CGPL">CGPL</option>
+        <option value="GANDHAR-APM">GANDHAR-APM</option>
+        <option value="GANDHAR-NAPM">GANDHAR-NAPM</option>
+        <option value="GANDHAR-RLNG">GANDHAR-RLNG</option>
+        <option value="KAPS">KAPS</option>
+        <option value="KAWAS-APM">KAWAS-APM</option>
+        <option value="KAWAS-NAPM">KAWAS-NAPM</option>
+        <option value="KAWAS-RLNG">KAWAS-RLNG</option>
+        <option value="KAWAS-zLIQ">KAWAS-zLIQ</option>
+        <option value="KSTPS I&amp;II">KSTPS I&amp;II</option>
+        <option value="KSTPS7">KSTPS7</option>
+        <option value="MOUDA">MOUDA</option>
+        <option value="NSPCL">NSPCL</option>
+        <option value="RGPPL_EBID">RGPPL_EBID</option>
+        <option value="RGPPL-GAS">RGPPL-GAS</option>
+        <option value="RGPPL-RLNG">RGPPL-RLNG</option>
+        <option value="SASAN">SASAN</option>
+        <option value="SIPAT I">SIPAT I</option>
+        <option value="SIPAT II">SIPAT II</option>
+        <option value="SSP">SSP</option>
+        <option value="TAPS-I">TAPS-I</option>
+        <option value="TAPS-II">TAPS-II</option>
+        <option value="VSTPS I">VSTPS I</option>
+        <option value="VSTPS II">VSTPS II</option>
+        <option value="VSTPS III">VSTPS III</option>
+        <option value="VSTPS IV">VSTPS IV</option>
+        <option value="VSTPS V">VSTPS V</option>
+        <option value="Grand Total">Grand Total</option>
+    </select>
+    </select>
+    <button id="getDCGraphsButton" onclick="getDCGraphs()">getDCGraphs</button>
     <br><br>
+
     <div id="console" style="border: 1px solid black;width: 95%;height: 400px;overflow: auto;padding-left:5px">
     </div>
     <button onclick="clearConsole()">ClearConsole</button>
 </div>
 <script src="index.js"></script>
 <script src="netSchedules.js"></script>
+<script src="dcGraphs.js"></script>
 </body>
 </html>

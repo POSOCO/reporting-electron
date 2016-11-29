@@ -1,7 +1,6 @@
 var ipc = require("electron").ipcRenderer;
 
 
-
 var trace1 = {
     x: [0],
     y: [0],
@@ -24,8 +23,7 @@ ipc.on('append-graph-data', function (event, data) {
 
 ipc.on('replace-graph-data', function (event, data) {
     trace1.x = [];
-    trace1.y
-        = [];
+    trace1.y = [];
     for (var i = 0; i < data.data.length; i++) {
         trace1.x.push(data.data[i][0]);
         trace1.y.push(data.data[i][1]);
