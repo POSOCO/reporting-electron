@@ -1,25 +1,29 @@
 function getStateTotalNetMUData(stateStr, day, rev, done) {
     getNetScheduleData(day, rev, function (data) {
-        //Search for geb columns
-        //first combine the first 2 rows strings
-        var headings = [];
-        for (var i = 0; i < data[0].length; i++) {
-            headings[i] = data[0][i] + " " + data[1][i];
-        }
-        var headingIndex = headings.indexOf(stateStr);
-        if (headingIndex == -1) {
-            done({"mu": -1, "Error": "Invalid State Search String"});
-            return;
-        }
-        //now search for MWHR row index in second column
+        // Search for MWHR row index in second column
         var muRow = -1;
+        var muArray = [];
         for (var i = 0; i < data.length; i++) {
             if (data[i][1] == "MWHR") {
                 muRow = i;
                 break;
             }
         }
-        done({"mu": (data[muRow][headingIndex]) * 0.001});
+        //Search for state columns
+        //first combine the first 2 rows strings
+        var headings = [];
+        for (var i = 0; i < data[0].length; i++) {
+            headings[i] = data[0][i] + " " + data[1][i];
+        }
+        for (var i = 0; i < stateStr.length; i++) {
+            var headingIndex = headings.indexOf(stateStr[i]);
+            if (headingIndex == -1) {
+                muArray[i] = {"mu": -1, "Error": "Invalid State Search String", name: stateStr[i]};
+            } else {
+                muArray[i] = {"mu": (data[muRow][headingIndex]) * 0.001, name: stateStr[i]};
+            }
+        }
+        done({"muArray": muArray});
     });
 }
 
@@ -30,7 +34,7 @@ function getStateTotalNetMU() {
     getRevisionData(new Date(day), function (data) {
         WriteLineConsole("Latest revision is " + data[0]["Revision"]);
         var rev = data[0]["Revision"];
-        getStateTotalNetMUData(stateStr, new Date(day), rev, function (data) {
+        getStateTotalNetMUData([stateStr], new Date(day), rev, function (data) {
             WriteLineConsole(JSON.stringify(data));
         });
     });
@@ -39,19 +43,16 @@ function getStateTotalNetMU() {
 function getAllStatesTotalNetMU() {
     var day = document.getElementById("dateInp").value;
     var stateSelectEl = document.getElementById("stateSelect");
+    var stateStrArray = [];
+    for (var i = 0; i < stateSelectEl.options.length; i++) {
+        stateStrArray.push(stateSelectEl.options[i].value);
+    }
     //get latest revision
     getRevisionData(new Date(day), function (data) {
         WriteLineConsole("Latest revision is " + data[0]["Revision"]);
         var rev = data[0]["Revision"];
-        for (var i = 0; i < stateSelectEl.options.length; i++) {
-            var stateStr = stateSelectEl.options[i].value;
-            var callBackFactory = function () {
-                var str = stateStr;
-                return function (data) {
-                    WriteLineConsole(str + " Net MUs is " + data.mu);
-                }
-            };
-            getStateTotalNetMUData(stateStr, new Date(day), rev, callBackFactory());
-        }
+        getStateTotalNetMUData(stateStrArray, new Date(day), rev, function (data) {
+            WriteLineConsole(JSON.stringify(data));
+        });
     });
 }
